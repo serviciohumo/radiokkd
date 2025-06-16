@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEDADA MUSICAL - Reproductor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000000; /* Fondo negro sin gradientes azules */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-container {
+            background: #000000; /* Fondo negro sólido */
+            border-radius: 0px; /* Sin bordes redondeados para ocupar toda la pantalla */
+            padding: 10px;
+            box-shadow: none; /* Sin sombras */
+            text-align: center;
+            max-width: 100vw; /* Ancho completo */
+            width: 100%;
+            min-height: 100vh; /* Altura completa */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #FFD700; /* Amarillo dorado */
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.6);
+            z-index: 3;
+            position: relative;
+        }
+
+        .image-section {
+            position: relative;
+            margin: 20px 0;
+            background-color: #000000; /* Fondo negro detrás de la imagen */
+            background-image: url('https://i.postimg.cc/FRZgtmNy/LOGO-ICRO-VIVO2.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100px; /* Altura fija para la imagen */
+            border-radius: 15px;
+            filter: brightness(1.2) contrast(1.3) saturate(1.4);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .player-section {
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cc_player {
+            margin: 20px 0;
+            border-radius: 1px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: #FFD700 !important; /* Dorado sólido que destaca */
+            padding: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Estilos para hacer todo el reproductor del mismo color dorado */
+        .cc_player * {
+            background: #FFD700 !important;
+            color: #000 !important;
+            border-color: #FFA500 !important;
+        }
+
+        .cc_player button,
+        .cc_player input,
+        .cc_player select,
+        .cc_player .controls,
+        .cc_player .play-button,
+        .cc_player [class*="play"],
+        .cc_player [class*="button"],
+        .cc_player [class*="control"] {
+            background: #FFD700 !important;
+            color: #000 !important;
+            border: 2px solid #FFA500 !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6) !important;
+            transition: all 0.3s ease !important;
+            font-weight: bold !important;
+        }
+
+        .cc_player button:hover,
+        .cc_player input:hover,
+        .cc_player [class*="play"]:hover,
+        .cc_player [class*="button"]:hover {
+            background: #FFA500 !important;
+            transform: scale(1.05) !important;
+            box-shadow: 0 6px 20px rgba(255, 165, 0, 0.8) !important;
+        }
+
+        .cc_streaminfo {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #FFD700; /* Amarillo para mejor contraste con fondo negro */
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            animation: pulse 2s ease-in-out infinite alternate;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.02); }
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+
+
+        @media (max-width: 600px) {
+            .logo-title {
+                font-size: 2em;
+            }
+            
+            .player-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .image-section {
+                height: 150px;
+            }
+            
+            .cc_streaminfo {
+                font-size: 1.2em;
+            }
+        }
+
+        .player-container:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+
+        .player-container {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <h1 class="logo-title">KEDADA MUSICAL</h1>
+        
+        <div class="image-section"></div>
+        
+        <div class="player-section">
+            <div class="cc_player" data-username="kdd" data-size="sm" data-style="light">
+                Cargando reproductor...
+            </div>
+
+            <div class="cc_streaminfo" data-type="song" data-username="kdd">
+                <span class="status-indicator"></span>
+                Cargando información de la canción...
+            </div>
+        </div>
+    </div>
+
+    <script language="javascript" type="text/javascript" src="https://eu4.fastcast4u.com/system/player.js"></script>
+    <script language="javascript" type="text/javascript" src="https://eu4.fastcast4u.com/system/streaminfo.js"></script>
+</body>
+</html>
